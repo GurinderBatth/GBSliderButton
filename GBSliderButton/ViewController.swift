@@ -8,13 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,GBSliderButtonDelegate {
 
+    @IBOutlet weak var gbView: GBSliderView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        gbView.font = UIFont.systemFont(ofSize: 19)
     }
 
+    var err: Bool = true
+    
+    func sliderComplete() {
+        if err{
+            gbView.image = UIImage(named: "g1")
+        }
+    }
 
+    @IBAction func reset(){
+        gbView.reset()
+    }
+    
 }
 

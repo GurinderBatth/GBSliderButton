@@ -14,6 +14,7 @@
 		18E0F5BB2118A2D4006EE2B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E0F5B92118A2D4006EE2B8 /* LaunchScreen.storyboard */; };
 		18E0F5C62118A2D4006EE2B8 /* GBSliderButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0F5C52118A2D4006EE2B8 /* GBSliderButtonTests.swift */; };
 		18E0F5D12118A2D4006EE2B8 /* GBSliderButtonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0F5D02118A2D4006EE2B8 /* GBSliderButtonUITests.swift */; };
+		18E0F5DF2118AA5E006EE2B8 /* GBSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0F5DE2118AA5E006EE2B8 /* GBSliderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		18E0F5CC2118A2D4006EE2B8 /* GBSliderButtonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GBSliderButtonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E0F5D02118A2D4006EE2B8 /* GBSliderButtonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBSliderButtonUITests.swift; sourceTree = "<group>"; };
 		18E0F5D22118A2D4006EE2B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18E0F5DE2118AA5E006EE2B8 /* GBSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBSliderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				18E0F5B72118A2D4006EE2B8 /* Assets.xcassets */,
 				18E0F5B92118A2D4006EE2B8 /* LaunchScreen.storyboard */,
 				18E0F5BC2118A2D4006EE2B8 /* Info.plist */,
+				18E0F5DE2118AA5E006EE2B8 /* GBSliderView.swift */,
 			);
 			path = GBSliderButton;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E0F5B32118A2D2006EE2B8 /* ViewController.swift in Sources */,
+				18E0F5DF2118AA5E006EE2B8 /* GBSliderView.swift in Sources */,
 				18E0F5B12118A2D2006EE2B8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
