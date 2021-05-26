@@ -248,6 +248,10 @@ class GBSliderView: UIView {
                     self.imageView.transform = .identity
                 }){ completed in
                     if completed{
+                        if !self.isDelegateCalled{
+                            self.gbSliderDelegate?.sliderComplete(direction: .left)
+                            self.isDelegateCalled = true
+                        }
                         self.colors(direction: .left)
                     }
                 }
@@ -256,6 +260,10 @@ class GBSliderView: UIView {
                     self.imageView.transform = CGAffineTransform(translationX: self.bounds.width - self.imageView.bounds.width, y: 0)
                 }){ completed in
                     if completed{
+                        if !self.isDelegateCalled{
+                            self.gbSliderDelegate?.sliderComplete(direction: .right)
+                            self.isDelegateCalled = true
+                        }
                         self.colors(direction: .right)
                     }
                 }
@@ -279,6 +287,7 @@ class GBSliderView: UIView {
                 if completed {
                     self.gbSliderDelegate?.sliderComplete(direction: .left)
                     self.colors(direction: .left)
+                    self.isDelegateCalled = true
                 }
             }
         case .right:
@@ -288,6 +297,7 @@ class GBSliderView: UIView {
                 if completed{
                     self.gbSliderDelegate?.sliderComplete(direction: .right)
                     self.colors(direction: .right)
+                    self.isDelegateCalled = true
                 }
             }
         default:
@@ -313,6 +323,7 @@ class GBSliderView: UIView {
     }
     
     private func panGestureLogic(_ translation: CGPoint){
+//        print(imageView.frame.origin.x)
         if translation.x > 0{
             if imageView.frame.origin.x >= (self.bounds.width - imageView.bounds.width){
                 if !isDelegateCalled{
