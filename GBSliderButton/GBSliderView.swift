@@ -13,6 +13,11 @@ enum GBSliderDirection: String{
     case right
 }
 
+fileprivate enum GestureDirection{
+    case left
+    case right
+}
+
 protocol GBSliderButtonDelegate {
     func sliderComplete(direction: GBSliderDirection)
 }
@@ -137,6 +142,7 @@ class GBSliderView: UIView {
         
 //MARK:-  Private Properties
     private var isDelegateCalled: Bool = false
+    private var gestureDirection = GestureDirection.left
     
     private lazy var imageView: UIImageView = {
         let img = UIImageView()
@@ -208,10 +214,12 @@ class GBSliderView: UIView {
         case .left:
             imageView.transform = .identity
             self.colors(direction: .left)
+            self.gestureDirection = .left
         case .right:
             self.layoutIfNeeded()
             imageView.transform = CGAffineTransform(translationX: self.bounds.width - imageView.bounds.width, y: 0)
             self.colors(direction: .right)
+            self.gestureDirection = .right
         }
     }
     
@@ -248,9 +256,9 @@ class GBSliderView: UIView {
                     self.imageView.transform = .identity
                 }){ completed in
                     if completed{
-                        if !self.isDelegateCalled{
+                        if self.gestureDirection == .right{
                             self.gbSliderDelegate?.sliderComplete(direction: .left)
-                            self.isDelegateCalled = true
+                            self.gestureDirection = .left
                         }
                         self.colors(direction: .left)
                     }
@@ -260,9 +268,9 @@ class GBSliderView: UIView {
                     self.imageView.transform = CGAffineTransform(translationX: self.bounds.width - self.imageView.bounds.width, y: 0)
                 }){ completed in
                     if completed{
-                        if !self.isDelegateCalled{
+                        if self.gestureDirection == .left{
                             self.gbSliderDelegate?.sliderComplete(direction: .right)
-                            self.isDelegateCalled = true
+                            self.gestureDirection = .right
                         }
                         self.colors(direction: .right)
                     }
@@ -285,9 +293,11 @@ class GBSliderView: UIView {
                 print(self.imageView.frame)
             }) { (completed) in
                 if completed {
-                    self.gbSliderDelegate?.sliderComplete(direction: .left)
-                    self.colors(direction: .left)
-                    self.isDelegateCalled = true
+                    if self.gestureDirection == .right{
+                        self.gbSliderDelegate?.sliderComplete(direction: .left)
+                        self.colors(direction: .left)
+                        self.gestureDirection = .left
+                    }
                 }
             }
         case .right:
@@ -295,9 +305,11 @@ class GBSliderView: UIView {
                 self.imageView.transform = CGAffineTransform(translationX: self.bounds.width - self.imageView.bounds.width, y: 0)
             }) { completed in
                 if completed{
-                    self.gbSliderDelegate?.sliderComplete(direction: .right)
-                    self.colors(direction: .right)
-                    self.isDelegateCalled = true
+                    if self.gestureDirection == .left{
+                        self.gbSliderDelegate?.sliderComplete(direction: .right)
+                        self.colors(direction: .right)
+                        self.gestureDirection = .left
+                    }
                 }
             }
         default:
@@ -323,27 +335,24 @@ class GBSliderView: UIView {
     }
     
     private func panGestureLogic(_ translation: CGPoint){
-//        print(imageView.frame.origin.x)
         if translation.x > 0{
             if imageView.frame.origin.x >= (self.bounds.width - imageView.bounds.width){
-                if !isDelegateCalled{
+                if gestureDirection == .left{
                     self.gbSliderDelegate?.sliderComplete(direction: .right)
                     self.colors(direction: .right)
-                    isDelegateCalled = true
+                    gestureDirection = .right
                 }
             }else{
-                isDelegateCalled = false
                 imageView.transform = CGAffineTransform(translationX: imageView.center.x + translation.x, y: 0)
             }
         }else if translation.x < 0{
             if imageView.frame.origin.x > 0{
                 imageView.transform = CGAffineTransform(translationX: (self.bounds.width - imageView.bounds.width) + translation.x, y: 0)
-                self.isDelegateCalled = false
             }else{
-                if !isDelegateCalled{
+                if gestureDirection == .right{
                     self.gbSliderDelegate?.sliderComplete(direction: .left)
                     self.colors(direction: .left)
-                    self.isDelegateCalled = true
+                    self.gestureDirection = .left
                 }
             }
         }
