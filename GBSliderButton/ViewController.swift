@@ -15,18 +15,14 @@ class ViewController: UIViewController,GBSliderButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         gbView.font = UIFont.systemFont(ofSize: 19)
+        gbView.gbSliderDelegate = self
     }
-
-    var err: Bool = true
     
-    func sliderComplete() {
-        if err{
-            gbView.image = UIImage(named: "g1")
-        }
+    func sliderComplete(direction: GBSliderDirection) {
+        print("Direction \(direction)")
     }
 
     @IBAction func reset(){
-        gbView.reset()
     }
     
 }
